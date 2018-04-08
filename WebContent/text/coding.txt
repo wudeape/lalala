@@ -1,0 +1,71 @@
+ bool prime[MAX] 
+memset (prime ,true ,sizeof(prime)) 初始化将prime数组全部变成true
+文件的读入和读出
+
+prime[0] = prime[1] = false; prime[2] = true;//0，1都不是素数，所以为false，2是素数，
+所以为true
+     for(i = 2; i * i <= MAX; i ++)/*从2开始进行遍历，
+ i * i <= MAX 就等价于 i < sqrt(MAX);但是前者更不容易出错
+      具体为什么是sqrt就不用说了吧，普通的方法中也有这个*/   
+     {
+        if(prime[i])//如果没有被标记的话将它的
+倍数的数标记(标记就是将它赋值为false)         {
+             for(j = i + i; j <= MAX; j += i)//因为是从2开始的
+，所以j = i * i 就行了，最小的一个他的倍数的
+就是i * i了，不可能有比这个更小的了
+                 prime[j] = false;//标记为false
+         }
+     }
+
+ FILE *fin , * fout;
+fin = fopen("hostein.in","r");
+fout  = fopen ("hoetein.out","w");
+
+最大公约数
+int gcd(int a, int b){
+return b==0? a : gcd (a,a%b);
+}
+
+筛选法求prime  首先是标记然后筛选
+ meset(vis, 0 ,sizeof(vis)){
+  for (int i=0; i< n; i++)
+
+  for (int j=i*2 ; j<=n;j+=i)
+  vis[j]=1;
+  
+}
+判断一个数是否为质数    当范围不是很大时
+int isPrime(int num){
+ int i;
+ if(num <=3) return 1;
+ if(num %2 ==0 || num %3 ==0) return 0;
+ for( i =5;i*i< =num;i++)
+if( num %i ==0)
+ return0;
+return 1;
+
+}
+
+首先是判断一个数是否为回文数 (高位和低位进行比较  时间复杂度较大)
+ bool isPadlindrome (int n){
+   if( n== INT_MIN)   // 如果是int类型的最小值,显然不是
+{ return false ;}
+ n = abs(n);
+ int tmp =1;
+  while ( n/tmp >=10)
+{   tmp * = 10;}    //将tmp位数变为n一致
+ while ( n! =0)
+{  if (n/tmp! = n%10)  //最高位！= 最低位
+{ return false;}
+   n = (n% tmp) /10;
+  tmp /=100;
+}
+return true;
+}
+
+回文数  确定中间的一个数,然后枚举旁边的侧向
+ reverse2( int num,int middle){
+  int i; save=num;digit , combino=1;
+  for ( i =0;)
+
+}
