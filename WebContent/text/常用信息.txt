@@ -3,5 +3,8 @@ http://www.jb51.net/article/123401.htm
 spring 的事务管理
 http://www.mamicode.com/info-detail-1248286.html
 
+一些技术的快速入门
+http://www.cnblogs.com/gefenghua/p/6492736.html
+
 
 查一下struts 页面跳转
