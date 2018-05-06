@@ -1,0 +1,54 @@
+（10）查询选修其课程的学生人数多于5人的教师姓名。
+SQL> select TC.name,XS_KC.cno from XS_KC ,TC,KC where TC.tno = KC.tno
+ and KC.cno = XS_KC.cno  group by XS_KC.cno,TC.name having count(*)>5;
+
+（11）查询“计算机系”与“电子工程系”不同职称的教师的姓名和职称。
+SQL> select name,prof
+  2  from tc
+  3  where depart='计算机系' or depart='电子工程'
+  4  group by prof,name;
+
+12）查询选修编号为“3-105”课程且成绩至少高于选修编号为“3-245”课程的同学的CNO、NO 、GRADE并按GRADE从高到低次序排列。
+select * from  xs_kc 
+where cno='3-105' and grade >all (select grade from xs_kc where cno='3-245')
+order by grade desc;
+
+（14）列出所有教师和同学的NAME 、SEX 、AGE。
+SQL> select xs.name,xs.sex,xs.age,
+  2  tc.name,tc.sex,tc.age
+  3  from
+  4  xs inner join (xs_kc inner join (kc inner join tc on kc.tno=tc.tno)
+  5  on xs_kc.cno=kc.cno) on xs.no=xs_kc.no;
+
+（18）列出至少有2名男生的班号。
+
+SQL> select class as 班号
+  2  from xs
+  3  where sex='男' group by class having count(class) >= 2;
+班号
+-----
+95033
+95031
+
+
+（20）查询每门课最高分的学生的NO、CNO、GRADE。
+SQL> select *
+  2  from xs_kc
+  3  where grade in (select max(grade) from xs_kc group by cno);
+
+（25）在基本表xs_kc中删除尚无成绩的选课元组。
+SQL> delete from XS_KC where grade =null;
+0 rows deleted
+
+（26）把选修数学课不及格的成绩全改为空值。
+SQL> update xs_kc set grade =null where grade<60 and cno in (select cno from kc where cname='高等数学');
+
+（17）列出所有未讲课教师的NAME和DEPART。
+SQL> select tc.name as 教师姓名,depart as 所属院系
+  2  from tc
+  3  where tno not in
+  4  (select tno
+  5  from kc
+  6  where cno in (
+  7  select cno
+  8  from xs_kc group by cno));
